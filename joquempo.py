@@ -4,7 +4,7 @@ def jokenpoll(e):
         return "Pedra"
     elif e == 2:
         return "Papel"
-    else:
+    elif e == 3:
         return "Tesoura"
 
 def resultado(u, m):
@@ -28,20 +28,33 @@ def resultado(u, m):
                 return 'PERDEU!!!'
             elif m == 'Pedra':
                 return 'VENCEU!!!'
+
+def leiaInt(termo):
+    if termo.isnumeric() is True:
+        return int(termo)
+    else:
+        while termo.isnumeric() is False:
+            print('\033[1;31mERRO! Digite uma opção válido.\033[m')
+            termo = input('Escolha, [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura: ')
+        return int(termo)
+
 vitorias = 0
 
 while True:
     
     print('-='*30)
     escolha_maquina = randint(1,3)
-    escolha_usuario = int(input('Escolha, [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura: '))
+    escolha_usuario = leiaInt(input('Escolha, [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura: '))
     
     if escolha_usuario == 999:
         break
         
-    while escolha_usuario not in (1, 2, 3):
-        print('VALOR INVÁLIDO!!')
-        escolha_usuario = int(input('Escolha [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura: '))
+    while escolha_usuario not in (1, 2, 3, 999):
+        print('\033[1;31mERRO! Digite uma opção válido.\033[m')
+        escolha_usuario = leiaInt(input('Escolha [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura: '))
+
+    if escolha_usuario == 999:
+            break
     
     maquina = jokenpoll(escolha_maquina)
     usuario = jokenpoll(escolha_usuario)
