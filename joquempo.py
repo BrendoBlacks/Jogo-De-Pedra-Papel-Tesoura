@@ -9,25 +9,25 @@ def jokenpoll(e):
 
 def resultado(u, m):
     if u == m:
-        return "EMPATOU"
+        return "\033[1;33mEMPATOU\033[m"
     else:    
         if u == 'Pedra':
             if m == 'Papel':
-                return 'PERDEU!!!'
+                return '\033[1;31mPERDEU!!!\033[m'
             elif m == 'Tesoura':
-                return 'VENCEU!!!'
+                return '\033[1;32mVENCEU!!!\033[m'
             
         elif u == 'Tesoura':
             if m == 'Pedra':
-                return 'PERDEU!!!'
+                return '\033[1;31mPERDEU!!!\033[m'
             elif m == 'Papel':
-                return 'VENCEU!!!'
+                return '\033[1;32mVENCEU!!!\033[m'
         
         elif u == 'Papel':
             if m == 'Tesoura':
-                return 'PERDEU!!!'
+                return '\033[1;31mPERDEU!!!\033[m'
             elif m == 'Pedra':
-                return 'VENCEU!!!'
+                return '\033[1;32mVENCEU!!!\033[m'
 
 def leiaInt(termo):
     if termo.isnumeric() is True:
@@ -35,7 +35,7 @@ def leiaInt(termo):
     else:
         while termo.isnumeric() is False:
             print('\033[1;31mERRO! Digite uma opção válido.\033[m')
-            termo = input('Escolha, [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura: ')
+            termo = input('Escolha, [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura, [ 999 ] Sair: ')
         return int(termo)
 
 vitorias = 0
@@ -43,15 +43,16 @@ vitorias = 0
 while True:
     
     print('-='*30)
+    print(f'{' JOGO DO PEDRA, PAPEL E TESOURA ':-^60}')
     escolha_maquina = randint(1,3)
-    escolha_usuario = leiaInt(input('Escolha, [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura: '))
+    escolha_usuario = leiaInt(input('Escolha, [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura, [ 999 ] Sair: '))
     
     if escolha_usuario == 999:
         break
         
     while escolha_usuario not in (1, 2, 3, 999):
         print('\033[1;31mERRO! Digite uma opção válido.\033[m')
-        escolha_usuario = leiaInt(input('Escolha [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura: '))
+        escolha_usuario = leiaInt(input('Escolha [ 1 ] Pedra, [ 2 ] Papel, [ 3 ] Tesoura, [ 999 ] Sair: '))
 
     if escolha_usuario == 999:
             break
@@ -65,7 +66,7 @@ while True:
     print(f'Máquina: {maquina}')
     print(f'Você {r}')
     
-    if r == 'VENCEU!!!':
+    if r == '\033[1;32mVENCEU!!!\033[m':
         vitorias += 1
 
 print('-='*30)
